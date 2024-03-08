@@ -1,16 +1,52 @@
-import { MdAddCircleOutline } from "react-icons/md";
+import { useCreateTodo } from "@/hooks/useTodo";
+import React from "react";
 
 export default function AddTodo() {
+  const { createTodoMutate } = useCreateTodo();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const deadline = formData.get("deadline") as string;
+    const title = formData.get("title") as string;
+    const content = formData.get("content") as string;
+
+    const newTodo = {
+      deadline,
+      title,
+      content,
+      state: false,
+    };
+
+    createTodoMutate(newTodo, {
+      onSuccess: () => {
+        (e.target as HTMLFormElement).reset();
+      },
+      onError: (error) => {
+        console.log("fail to createTodoMutate", error);
+      },
+    });
+  };
+
+  //(e.target as HTMLFormElement).reset();
+  //reset는 매서드이나 내장 매서드로 타입을 함께 선언해 주어야 한다. 내가 한 방법은 단언
+
   return (
-    <article className="w-1/4 mt-6">
-      <form className="flex flex-col mt-10 ml-6">
-        <label htmlFor="date" className="text-yellowfont font-bold">
-          날짜
+    <article
+      className="flex w-1/3 h-full items-center justify-center border-r m-0 border-yellowfont"
+      style={{ height: `calc(100vh - var(--header-height))` }}
+    >
+      <form
+        className="flex flex-col h-full m-0 w-80 justify-center"
+        onSubmit={handleSubmit}
+      >
+        <label htmlFor="date" className="text-yellowfont font-bold ">
+          마감 일자
         </label>
         <input
           type="date"
-          name="date"
-          id="date"
+          name="deadline"
+          id="deadline"
           required
           className="bg-darkyellow mt-2 h-10 text-center"
         />
@@ -29,19 +65,14 @@ export default function AddTodo() {
         </label>
         <input
           type="text"
-          name="todo"
-          id="todo"
+          name="content"
+          id="content"
           required
           className="bg-darkyellow mt-2 h-10 text-center"
         />
-        <button
-          type="button"
-          className="text-sm mt-3 flex flex-row justify-center relative "
-        >
-          리스트 추가
-          <MdAddCircleOutline className="absolute right-40 top-1 bottom-0 " />
+        <button className="bg-darkyellow mt-20 h-10 font-bold text-3xl">
+          추가
         </button>
-        <button className="bg-darkyellow mt-2 h-10">생성</button>
       </form>
     </article>
   );

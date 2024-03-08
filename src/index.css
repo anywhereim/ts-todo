@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body,
+html,
+#root {
   background-color: black;
   color: white;
+  height: 100%;
+}
+
+:root {
+  --header-height: 7rem;
+}
+
+li,
+ul {
+  list-style-type: none;
 }

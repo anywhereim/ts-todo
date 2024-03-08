@@ -1,11 +1,15 @@
 import AddTodo from "@/components/AddTodo";
-import Header from "@/components/Header";
+import TodoList from "@/components/TodoList";
+import Header from "@/layout/Header";
 
 export default function Home() {
   return (
-    <>
+    <div className=" h-screen">
       <Header />
-      <AddTodo />
-    </>
+      <div className="flex flex-low">
+        <AddTodo />
+        <TodoList />
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,25 @@
+{
+  "todo": [
+    {
+      "id": "0fff",
+      "deadline": "2024-03-07",
+      "title": "과제하기",
+      "content": "완료버튼 만들기",
+      "state": false
+    },
+    {
+      "id": "975c",
+      "deadline": "2024-03-16",
+      "title": "ㅈㄷ",
+      "content": "ㅈㄷㄱ",
+      "state": true
+    },
+    {
+      "id": "2f6e",
+      "deadline": "2024-03-07",
+      "title": "무엇이 무엇이 똑같을까",
+      "content": "젓가락 두짝이 똑같아요",
+      "state": true
+    }
+  ]
+}
